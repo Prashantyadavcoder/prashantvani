@@ -1,0 +1,346 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry My Love</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #ff4d94;
+            text-shadow: 0 0 15px rgba(255, 77, 148, 0.7);
+            letter-spacing: 2px;
+        }
+        
+        .heart {
+            position: absolute;
+            background: #ff4d94;
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            transform: rotate(-45deg);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .heart:before, .heart:after {
+            content: "";
+            background: #ff4d94;
+            border-radius: 50%;
+            height: 30px;
+            position: absolute;
+            width: 30px;
+        }
+        
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+        
+        .heart:after {
+            left: 15px;
+            top: 0;
+        }
+        
+        @keyframes pulse {
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.3); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+        
+        .message-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        h2 {
+            color: #ff4d94;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .interactive-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .gift-box {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #ff4d94, #ff8ecd);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+        }
+        
+        .gift-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 77, 148, 0.6);
+        }
+        
+        .apology-button {
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #ff4d94, #ff3366);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 30px auto;
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+        }
+        
+        .apology-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 77, 148, 0.6);
+        }
+        
+        .memory-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .memory-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .photo-frame {
+            width: 100%;
+            height: 200px;
+            background: #333;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .photo-placeholder {
+            color: #aaa;
+            font-size: 1rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            color: #ff4d94;
+            font-size: 20px;
+            opacity: 0;
+            animation: float 8s linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                top: 100%;
+                opacity: 1;
+            }
+            100% {
+                top: -20%;
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .interactive-section {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="hearts-container"></div>
+    
+    <div class="container">
+        <header>
+            <h1>I'M SORRY MY LOVE</h1>
+            <p>This website is dedicated to you and only you</p>
+        </header>
+        
+        <section class="message-section">
+            <h2>My Heartfelt Apology</h2>
+            <p>My dearest, I know I've hurt you and I'm truly sorry from the bottom of my heart.</p>
+            <p>You mean everything to me, and seeing you upset breaks my heart.</p>
+            <p>I promise to learn from my mistakes and be a better person for you.</p>
+            <p>Your happiness is my priority, and I'll do whatever it takes to see you smile again.</p>
+        </section>
+        
+        <section class="interactive-section">
+            <div class="gift-box" onclick="revealMessage(1)">
+                <span>Click Me</span>
+            </div>
+            <div class="gift-box" onclick="revealMessage(2)">
+                <span>Click Me</span>
+            </div>
+            <div class="gift-box" onclick="revealMessage(3)">
+                <span>Click Me</span>
+            </div>
+        </section>
+        
+        <button class="apology-button" onclick="showGrandApology()">Accept My Apology</button>
+        
+        <section class="message-section">
+            <h2>What You Mean To Me</h2>
+            <p>You are the light of my life, the reason I smile every day.</p>
+            <p>Your love has transformed me in ways I never thought possible.</p>
+            <p>I cherish every moment we spend together, and I can't imagine my life without you.</p>
+            <p>Please forgive me and let me make it up to you.</p>
+        </section>
+        
+       
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts-container');
+            const heartSymbols = ['❤️', '💖', '💕', '💞', '💘'];
+            
+            for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Reveal message when gift box is clicked
+        function revealMessage(boxNumber) {
+            const messages = [
+                "You are the most beautiful person inside and out",
+                "I fall more in love with you every day",
+                "My world is better with you in it"
+            ];
+            
+            alert(messages[boxNumber - 1]);
+        }
+        
+        // Show grand apology
+        function showGrandApology() {
+            document.body.style.background = "linear-gradient(135deg, #33001b 0%, #ff0084 100%)";
+            
+            const header = document.querySelector('header');
+            header.innerHTML += '<h2>Thank You For Giving Me Another Chance</h2>';
+            header.innerHTML += '<p>I promise to make you happy always</p>';
+            
+            // Create heart explosion
+            const heartsContainer = document.getElementById('hearts-container');
+            heartsContainer.innerHTML = '';
+            
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤️';
+                
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heart.style.animationDelay = '0s';
+                
+                heartsContainer.appendChild(heart);
+            }
+            
+            // Change button text
+            const button = document.querySelector('.apology-button');
+            button.textContent = "I Love You So Much!";
+            button.onclick = null;
+            button.style.background = "linear-gradient(45deg, #00b09b, #96c93d)";
+            
+            // Play sound (commented out to avoid automatic playback)
+            // const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-happy-bell-alert-601.mp3');
+            // audio.play();
+        }
+        
+        // Initialize the page
+        window.onload = function() {
+            createHearts();
+        };
+    </script>
+</body>
+</html>
